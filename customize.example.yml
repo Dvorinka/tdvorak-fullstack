@@ -1,0 +1,19 @@
+# Personalization answers for setup.sh --config
+# Flat key: value pairs. Unknown keys are ignored with a warning.
+
+skill_name: tdvorak-fullstack   # frontmatter name + install dir name
+
+author_name: Your Name          # goes into the mandatory commit trailer
+author_email: you@example.com
+github_handle: your-username    # goes into the PR comment attribution footer
+
+memory_remote: ""               # e.g. github.com/you/agent-memory — empty = local memory only
+
+stack_frontend: react           # react | solidjs | nextjs | none
+stack_backend: go               # go | node | python | none
+stack_db: postgres              # postgres | mysql | sqlite | none
+stack_cache: dragonfly          # dragonfly | redis | none
+stack_mobile: "false"           # "true" adds the React Native + Expo and Maestro rows
+stack_desktop: none             # wails | tauri | none
+
+install_to: auto                # auto = all detected agent skills dirs, or comma-separated paths
