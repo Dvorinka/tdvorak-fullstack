@@ -74,7 +74,7 @@ A rule without a machine checking it is a wish. Applies to every project.
 
 ## Local CI verification — act, actionlint, shellcheck
 
-- **act** (`brew install act`) — runs GitHub Actions workflows locally (`act -j <job>`, `act push`). Use when changing `.github/workflows/*` so YAML and step-logic failures surface before push, not in the remote run. `cix wait` remains the remote side.
+- **act** (`brew install act`) — runs GitHub Actions workflows locally (`act -j <job>`, `act push`). Use when changing `.github/workflows/*` so YAML and step-logic failures surface before push, not in the remote run. `ciwatch wait` remains the remote side.
 - **actionlint** — static lint for workflow YAML (undefined matrix keys, `run:` shell errors via embedded shellcheck). Wire into lefthook on `.github/workflows/**` paths in repos that ship workflows.
 - **shellcheck** — lint every committed `.sh` and hook script before push; it flags the quoting/exit-code bugs that only fail on the machine that matters.
 

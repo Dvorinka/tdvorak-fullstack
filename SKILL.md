@@ -54,7 +54,7 @@ Persistent memory lives in a dedicated git repo following the [Agent Memory Repo
 | Task runner | **just** — `justfile` at repo root | `cli-developer` |
 | Worktrees | **worktrunk (`wt`)** — git worktree lifecycle for parallel agent work: `wt switch -c <branch>` create+enter, `wt merge`, `wt remove`, `wt list` (status/CI), `wt switch pr:<n>`; project hooks automate `npm install`/env copy on create. Installed via linuxbrew; shell integration via `wt config shell install` | — |
 | Agent orchestration | **t3code (`t3`)** — dispatch parallel agent threads in isolated worktrees: `t3 thread start <project> --worktree <ref> --branch <n> --wait --json`; remote machines via `t3 environment link`. Routing table: `references/agent-ops.md` | — |
-| CI (local) | **act** — run GitHub Actions locally pre-push (`act -j <job>`); **actionlint** — workflow YAML lint; `shellcheck` — shell script lint. `cix` covers the remote side | — |
+| CI (local) | **act** — run GitHub Actions locally pre-push (`act -j <job>`); **actionlint** — workflow YAML lint; `shellcheck` — shell script lint. `ciwatch` covers the remote side | — |
 | HTTP debugging | **mitmproxy** (`mitmdump` headless) — capture/replay API traffic when the bug is on the wire | — |
 | Agent telemetry | **agenttrace** — session cost/token/duration reports, `--baseline` delta gating | — |
 | MCP servers | Whatever your harness wires — git, github, plus service MCPs (DB, files, deploys). Always `mcp_list_tools` before calling | — |
@@ -79,10 +79,10 @@ Four own tools, `go install github.com/Dvorinka/<name>/cmd/<name>@latest` or `in
 |---|---|---|
 | **docsync** | github.com/Dvorinka/docsync | After docs-touching changes and before PRs: docs drift vs code — env vars, paths, commands, API routes (go/express/nextjs), version pins. `check --format sarif` feeds code scanning; `--baseline` for legacy adoption. Config `.docsync.yml` |
 | **envdiff** | github.com/Dvorinka/envdiff | "Works on my machine" debugging: `scan` snapshots DNS/TLS/ports/HTTP/hashed env keys/versions/docker/k8s refs, `diff a b`, `check --baseline known-good.json` gates against a captured-good state. Never leaks secrets (hashed) |
-| **cix** | github.com/Dvorinka/cix | Any CI wait: `cix wait [--pr N]` resolves the run, slices the failed step's log, names failure signatures (custom via `.cix.yml` `signatures:`), reruns flakes once, exits with gate-aware codes. `preflight` = path-aware local checks before push |
+| **ciwatch** | github.com/Dvorinka/ciwatch | Any CI wait: `ciwatch wait [--pr N]` resolves the run, slices the failed step's log, names failure signatures (custom via `.ciwatch.yml` `signatures:`), reruns flakes once, exits with gate-aware codes. `preflight` = path-aware local checks before push |
 | **repolint** | github.com/Dvorinka/repolint | Before publishing or templating a repo: `repolint check` audits 16 local rules + `--remote` GitHub metadata (description/topics/releases); `repolint fix` scaffolds missing LICENSE/templates/workflows with ecosystem-aware templates |
 
-Typical loop: `repolint check` when creating/publishing a repo → `cix preflight` before push → `cix wait --pr` after opening the PR → `docsync check` when docs or env vars changed → `envdiff diff` when an env behaves differently between machines.
+Typical loop: `repolint check` when creating/publishing a repo → `ciwatch preflight` before push → `ciwatch wait --pr` after opening the PR → `docsync check` when docs or env vars changed → `envdiff diff` when an env behaves differently between machines.
 
 ## Token Efficiency (mandatory)
 - `ponytail` — invoke on every request: shortest working diff, YAGNI enforced (default profile, see Workflow).
@@ -182,7 +182,7 @@ Before every `git push`, the agent MUST verify the application is fully function
 2. **Tests**: Run the full test suite (e.g., `go test ./...`, `npm test`). All tests must pass.
 3. **Lint/Typecheck**: Run linters and type checkers (e.g., `go vet ./...`, `npx tsc --noEmit`). Zero warnings or errors.
 4. **Startup smoke test**: If feasible, start the app and verify it boots without crashes. For web apps, confirm the dev server responds. For APIs, hit a health endpoint.
-5. **Authored tools**: `cix preflight` — path-aware local checks, run it first when the repo carries a `.cix.yml`; `docsync check` when the diff touches docs, env vars, or API routes; `repolint check` before publishing or templating a repo.
+5. **Authored tools**: `ciwatch preflight` — path-aware local checks, run it first when the repo carries a `.ciwatch.yml`; `docsync check` when the diff touches docs, env vars, or API routes; `repolint check` before publishing or templating a repo.
 
 If any step fails, **STOP**. Do not push. Report the failure to the user with the exact error output and ask how to proceed. The user may explicitly override this rule ("push anyway" / "I know it's broken, push it") — only then may you push a broken build. Without an explicit override, a non-functional app is a hard blocker for push.
 

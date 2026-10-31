@@ -85,7 +85,7 @@ every detected agent skills directory on the machine.
 |---|---|
 | [docsync](https://github.com/Dvorinka/docsync) | docs ↔ code drift check before PRs |
 | [envdiff](https://github.com/Dvorinka/envdiff) | "works on my machine" environment diffs |
-| [cix](https://github.com/Dvorinka/cix) | CI wait/failure triage + local preflight |
+| [ciwatch](https://github.com/Dvorinka/ciwatch) | CI wait/failure triage + local preflight |
 | [repolint](https://github.com/Dvorinka/repolint) | repo hygiene audit before publishing |
 
 `go install github.com/Dvorinka/<name>/cmd/<name>@latest` — all emit `--json`.
