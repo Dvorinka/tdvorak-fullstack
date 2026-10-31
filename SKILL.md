@@ -102,7 +102,7 @@ Typical loop: `repolint check` when creating/publishing a repo → `cix prefligh
 - TypeScript must preserve type evidence. No `as X as Y` chains, no widen-then-assert flows, no `Record<string, unknown>` dictionaries. Every non-const type assertion requires a `// SAFETY:` comment documenting the checked invariant. Enforce via Oxlint with vendored `anti-slop` rules - see `references/architecture.md`.
 - Never manually duplicate API types in frontend.
 - Never write Go backend code without consulting the relevant `golang-*` skill.
-- No custom/ad-hoc Stripe implementations — always `stripe-kv-sync` (verified, idempotent webhooks, KV-synced state).
+- No custom/ad-hoc Stripe implementations — always `stripe-kv-sync` (verified, idempotent webhooks, KV-synced state). Guidance: https://github.com/t3dotgg/stripe-recommendations
 - All schema changes via versioned migrations. Never mutate production schema manually.
 - Don't spawn paid/remote subagents unless the task genuinely justifies it — do the work inline by default.
 - Inspect `skills/` directory first; reuse skills over reimplementing. Compose, don't duplicate. Use MCP servers when available.

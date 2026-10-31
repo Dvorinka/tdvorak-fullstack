@@ -30,10 +30,10 @@ Grok, Copilot — any harness that reads `SKILL.md` skills or plain rule files.
 |---|---|---|
 | **Agent + user** (recommended) | point your agent at `SETUP.md` | agent inspects your env, asks you a few questions, generates |
 | User only | `./setup.sh` | you, via interactive questionnaire |
-| Agent only | `./setup.sh --config customize.yml --install --yes` | agent fills `customize.yml` itself |
+| Agent only | `cp customize.example.yml customize.yml`, then `./setup.sh --config customize.yml --install --yes` | agent fills the answers itself |
 | Stock | `./setup.sh --stock` | nobody — profile ships as-is |
 
-The output is a complete skill directory in `dist/`; `--install` copies it into
+The output is a complete skill directory under `./dist/<skill-name>/` (generated, gitignored); `--install` copies it into
 every detected agent skills directory on the machine.
 
 ## What the profile enforces
@@ -52,7 +52,7 @@ every detected agent skills directory on the machine.
 | Layer | Default |
 |---|---|
 | Frontend | [React 18](https://react.dev) + [Vite](https://vite.dev) + TS strict + [Tailwind](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com) |
-| Backend | [Go](https://go.dev) + [Gin](https://gin-gonic.com), `zap` |
+| Backend | [Go](https://go.dev) + [Gin](https://gin-gonic.com), [zap](https://github.com/uber-go/zap) |
 | DB | [PostgreSQL](https://postgresql.org) + [sqlc](https://sqlc.dev) + [goose](https://github.com/pressly/goose) |
 | Cache | [DragonflyDB](https://dragonflydb.io) |
 | API contract | [OpenAPI](https://openapis.org) → generated clients |
@@ -76,7 +76,7 @@ every detected agent skills directory on the machine.
 | Maps | [MapCN](https://www.mapcn.dev) |
 | Design | [Boneyard](https://github.com/0xGF/boneyard) · shadcn/ui |
 | Auth | [Better Auth](https://better-auth.com) |
-| Billing | [stripe-kv-sync](https://github.com/AgentMemoryRepo) pattern (skill) |
+| Billing | `stripe-kv-sync` skill + [t3dotgg/stripe-recommendations](https://github.com/t3dotgg/stripe-recommendations) guidance |
 | Memory | [Agent Memory Repo spec](https://github.com/AgentMemoryRepo/agentmemoryrepo) |
 
 ### Companion agent CLIs (optional, by the same author)
