@@ -40,7 +40,7 @@ Persistent memory lives in a dedicated git repo following the [Agent Memory Repo
 | Frontend (alt) | **SolidJS + Vite** — only when user explicitly requests SolidJS | `solidjs-expert` |
 | Backend | **Go + Gin**, `zap` logging, small packages, no magic | `golang-pro`, `go-expert` |
 | DB | **PostgreSQL + sqlc + goose** (versioned migrations only) | `postgres-pro`, `neon-postgres`, `sql-pro` |
-| Cache | **DragonflyDB** (Redis-compatible, multi-threaded, drop-in) — prefer over Redis | `database-optimizer` |
+| Cache | **DragonflyDB** (Redis-compatible, multi-threaded, drop-in) primary; **Redis** second option when Dragonfly lacks a needed Redis feature/module | `database-optimizer` |
 | Auth | **Better Auth** (cookie sessions); **Neon Auth** only if user opts out of local | `secure-code-guardian` |
 | API contract | **OpenAPI** single source of truth → generate TS client + types (no manual duplication) | `api-designer` |
 | Infra | **Docker Compose** (`docker compose up` must run the stack); Nginx/Traefik for TLS/routing | `devops-engineer` |
@@ -61,7 +61,7 @@ Persistent memory lives in a dedicated git repo following the [Agent Memory Repo
 | Shell env | **direnv** — committed `.envrc` per repo for gated env vars (test DSNs); see `references/toolchain.md` | — |
 | API collections | **Bruno** — `bruno/` committed `.bru` files, `bru run` headless | — |
 | Dep updates | **Dependabot** (`.github/dependabot.yml`, grouped weekly) — Renovate only if PR plumbing is wanted | — |
-| Security scan | **trivy fs** (deps/secrets) + **ZAP baseline** (headers/DAST vs deploys) + **gitleaks** | `security-reviewer` |
+| Security scan | **trivy fs** (deps/secrets) + **ZAP baseline** (headers/DAST vs deploys) + **gitleaks** + [Cloudflare security-audit-skill](https://github.com/cloudflare/security-audit-skill) (`security-audit` skill: multi-phase audit, independently verified findings) | `security-reviewer` |
 | Go lint | **golangci-lint** in CI — `go vet` alone misses errcheck/staticcheck/unused | `golang-pro` |
 | Observability | **OpenTelemetry** — adopt on demand (needs collector+backend); slog/zap logs are the floor | — |
 | GRC / compliance | **Probo** — self-hosted, adopt on demand only (SOC2/ISO27001/GDPR) | — |
@@ -200,7 +200,7 @@ Before opening a PR or declaring a feature complete, verify every docs surface r
 If any docs surface is stale or missing: update it in the same diff — never "docs later". A feature without docs is unfinished work, not a PR.
 
 ## Post-Build Workflow (after user approval)
-1. `desloppify` — structure, maintainability, performance, architecture clarity.
-2. `security-reviewer` — SAST, vulnerability scan, audit report.
+1. [`desloppify`](https://github.com/Dvorinka/desloppify) — structure, maintainability, performance, architecture clarity.
+2. `security-reviewer` — SAST, vulnerability scan, audit report. For a full audit with verified, machine-readable findings: [Cloudflare security-audit-skill](https://github.com/cloudflare/security-audit-skill) (`security-audit`).
 3. `web-design-guidelines` — a11y, UX, anti-patterns. `jury` when a scored design review is wanted.
 4. Append README scorecard: Performance, Security, Maintainability, Developer Experience.
