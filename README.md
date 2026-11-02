@@ -54,7 +54,7 @@ every detected agent skills directory on the machine.
 | Frontend | [React 18](https://react.dev) + [Vite](https://vite.dev) + TS strict + [Tailwind](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com) |
 | Backend | [Go](https://go.dev) + [Gin](https://gin-gonic.com), [zap](https://github.com/uber-go/zap) |
 | DB | [PostgreSQL](https://postgresql.org) + [sqlc](https://sqlc.dev) + [goose](https://github.com/pressly/goose) |
-| Cache | [DragonflyDB](https://dragonflydb.io) |
+| Cache | [DragonflyDB](https://dragonflydb.io) primary · [Redis](https://redis.io) second option |
 | API contract | [OpenAPI](https://openapis.org) → generated clients |
 | Infra | [Docker Compose](https://docs.docker.com/compose/) |
 | Desktop | [Wails](https://wails.io) / [Tauri](https://tauri.app) |
@@ -70,7 +70,7 @@ every detected agent skills directory on the machine.
 | Agent orchestration | [t3code](https://t3.codes) |
 | Local CI | [act](https://github.com/nektos/act) · [actionlint](https://github.com/rhysd/actionlint) · [shellcheck](https://shellcheck.net) |
 | HTTP debug | [mitmproxy](https://mitmproxy.org) |
-| Security | [trivy](https://trivy.dev) · [ZAP baseline](https://zaproxy.org) · [gitleaks](https://gitleaks.io) · [govulncheck](https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck) |
+| Security | [trivy](https://trivy.dev) · [ZAP baseline](https://zaproxy.org) · [gitleaks](https://gitleaks.io) · [govulncheck](https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck) · [security-audit-skill](https://github.com/cloudflare/security-audit-skill) |
 | Search/data | [ripgrep](https://github.com/BurntSushi/ripgrep) · [fd](https://github.com/sharkdp/fd) · [jq](https://jqlang.github.io/jq/) · [yq](https://github.com/mikefarah/yq) · [TOON](https://github.com/toon-format/toon) · [sqlglot](https://github.com/tobymao/sqlglot) |
 | DB tests | [testcontainers-go](https://golang.testcontainers.org) |
 | Maps | [MapCN](https://www.mapcn.dev) |
