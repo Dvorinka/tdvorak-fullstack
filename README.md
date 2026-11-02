@@ -77,6 +77,7 @@ every detected agent skills directory on the machine.
 | Design | [Boneyard](https://github.com/0xGF/boneyard) · shadcn/ui |
 | Auth | [Better Auth](https://better-auth.com) |
 | Billing | `stripe-kv-sync` skill + [t3dotgg/stripe-recommendations](https://github.com/t3dotgg/stripe-recommendations) guidance |
+| Code health | [desloppify](https://github.com/Dvorinka/desloppify) skill — post-build structure/maintainability/debt scan |
 | Memory | [Agent Memory Repo spec](https://github.com/AgentMemoryRepo/agentmemoryrepo) |
 
 ### Companion agent CLIs (optional, by the same author)

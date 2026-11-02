@@ -200,7 +200,7 @@ Before opening a PR or declaring a feature complete, verify every docs surface r
 If any docs surface is stale or missing: update it in the same diff — never "docs later". A feature without docs is unfinished work, not a PR.
 
 ## Post-Build Workflow (after user approval)
-1. `desloppify` — structure, maintainability, performance, architecture clarity.
+1. [`desloppify`](https://github.com/Dvorinka/desloppify) — structure, maintainability, performance, architecture clarity.
 2. `security-reviewer` — SAST, vulnerability scan, audit report.
 3. `web-design-guidelines` — a11y, UX, anti-patterns. `jury` when a scored design review is wanted.
 4. Append README scorecard: Performance, Security, Maintainability, Developer Experience.
