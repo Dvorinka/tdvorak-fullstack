@@ -26,7 +26,7 @@ Persistent memory lives in a dedicated git repo following the [Agent Memory Repo
 3. Read `references/toolchain.md` before adding, changing, or configuring lint/format/test/CI tooling.
 4. Read `references/maps.md` for any map/location/geospatial UI.
 5. Read `references/terminal-data.md` for search, JSON, pipelines.
-6. Read `references/agent-ops.md` before dispatching parallel agents, worktree lanes, or remote-machine work.
+6. Read `references/agent-ops.md` before dispatching parallel agents, worktree lanes, or remote-machine work. Read `references/t3code.md` for the full T3 Code surface (CLI, MCP tools, providers, scheduling, PR watch, limits).
 7. Invoke `ponytail` (default `full`) on every response — shortest working diff, stdlib first, no speculative abstractions. Mark shortcuts `// ponytail: <ceiling>, <upgrade path>`.
 8. Ship production-grade output: small modules, typed APIs, a11y, responsive, Docker-runnable.
 9. After meaningful changes: add concise inline comments (what/why/dependencies) and commit on a feature branch with a structured message. Open a PR - never push to `main` directly (see Pull Request Workflow).
@@ -53,7 +53,7 @@ Persistent memory lives in a dedicated git repo following the [Agent Memory Repo
 | Browser (live session) | **browser-harness** — CDP control of the real logged-in Chrome; reaches auth-walled flows Playwright's clean profile can't | — |
 | Task runner | **just** — `justfile` at repo root | `cli-developer` |
 | Worktrees | **worktrunk (`wt`)** — git worktree lifecycle for parallel agent work: `wt switch -c <branch>` create+enter, `wt merge`, `wt remove`, `wt list` (status/CI), `wt switch pr:<n>`; project hooks automate `npm install`/env copy on create. Installed via linuxbrew; shell integration via `wt config shell install` | — |
-| Agent orchestration | **t3code (`t3`)** — dispatch parallel agent threads in isolated worktrees: `t3 thread start <project> --worktree <ref> --branch <n> --wait --json`; remote machines via `t3 environment link`. Routing table: `references/agent-ops.md` | — |
+| Agent orchestration | **t3code (`t3`)** — dispatch parallel agent threads in isolated worktrees: `t3 thread start <project> --worktree <ref> --branch <n> --wait --json`; remote machines via `t3 environment link`. Routing table: `references/agent-ops.md`; full surface + guide: `references/t3code.md` | — |
 | CI (local) | **act** — run GitHub Actions locally pre-push (`act -j <job>`); **actionlint** — workflow YAML lint; `shellcheck` — shell script lint. `ciwatch` covers the remote side | — |
 | HTTP debugging | **mitmproxy** (`mitmdump` headless) — capture/replay API traffic when the bug is on the wire | — |
 | Agent telemetry | **agenttrace** — session cost/token/duration reports, `--baseline` delta gating | — |
