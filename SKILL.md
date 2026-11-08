@@ -55,6 +55,7 @@ Persistent memory lives in a dedicated git repo following the [Agent Memory Repo
 | Worktrees | **worktrunk (`wt`)** — git worktree lifecycle for parallel agent work: `wt switch -c <branch>` create+enter, `wt merge`, `wt remove`, `wt list` (status/CI), `wt switch pr:<n>`; project hooks automate `npm install`/env copy on create. Installed via linuxbrew; shell integration via `wt config shell install` | — |
 | Agent orchestration | **t3code (`t3`)** — dispatch parallel agent threads in isolated worktrees: `t3 thread start <project> --worktree <ref> --branch <n> --wait --json`; remote machines via `t3 environment link`. Routing table: `references/agent-ops.md`; full surface + guide: `references/t3code.md` | — |
 | CI (local) | **act** — run GitHub Actions locally pre-push (`act -j <job>`); **actionlint** — workflow YAML lint; `shellcheck` — shell script lint. `ciwatch` covers the remote side | — |
+| CI (self-hosted) | **KERN** (https://github.com/Dvorinka/kern) — GH Actions-compatible runner fleet; workflows run unmodified, `kern` CLI + MCP endpoint for agents; see `references/toolchain.md` | — |
 | HTTP debugging | **mitmproxy** (`mitmdump` headless) — capture/replay API traffic when the bug is on the wire | — |
 | Agent telemetry | **agenttrace** — session cost/token/duration reports, `--baseline` delta gating | — |
 | MCP servers | Whatever your harness wires — git, github, plus service MCPs (DB, files, deploys). Always `mcp_list_tools` before calling | — |
