@@ -27,9 +27,12 @@ Persistent memory lives in a dedicated git repo following the [Agent Memory Repo
 4. Read `references/maps.md` for any map/location/geospatial UI.
 5. Read `references/terminal-data.md` for search, JSON, pipelines.
 6. Read `references/agent-ops.md` before dispatching parallel agents, worktree lanes, or remote-machine work. Read `references/t3code.md` for the full T3 Code surface (CLI, MCP tools, providers, scheduling, PR watch, limits).
-7. Invoke `ponytail` (default `full`) on every response — shortest working diff, stdlib first, no speculative abstractions. Mark shortcuts `// ponytail: <ceiling>, <upgrade path>`.
-8. Ship production-grade output: small modules, typed APIs, a11y, responsive, Docker-runnable.
-9. After meaningful changes: add concise inline comments (what/why/dependencies) and commit on a feature branch with a structured message. Open a PR - never push to `main` directly (see Pull Request Workflow).
+7. Read `references/ship-verify.md` before deploying, verifying a release, or claiming something is live — clean-worktree deploys, verify the artifact not the stamp, process-leak sweep.
+8. Read `references/go-dbtest.md` before writing or running DB-backed Go tests (build-tag gating, isolated per-lane DBs, driver gotchas).
+9. Read `references/release-train.md` before tagging or releasing; `references/upstream-port-sweep.md` before syncing a fork with upstream; `references/handoff.md` before reporting done on multi-session work.
+10. Invoke `ponytail` (default `full`) on every response — shortest working diff, stdlib first, no speculative abstractions. Mark shortcuts `// ponytail: <ceiling>, <upgrade path>`.
+11. Ship production-grade output: small modules, typed APIs, a11y, responsive, Docker-runnable.
+12. After meaningful changes: add concise inline comments (what/why/dependencies) and commit on a feature branch with a structured message. Open a PR - never push to `main` directly (see Pull Request Workflow).
 
 ## Stack (locked — do not change without user approval)
 

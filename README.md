@@ -102,6 +102,12 @@ references/              deep docs, loaded on demand by the workflow
   maps.md                map component policy
   terminal-data.md       search/JSON/pipeline discipline
   agent-ops.md           parallel dispatch, worktrees, remote machines
+  t3code.md              T3 Code orchestration surface and usage guide
+  ship-verify.md         deploy-and-verify discipline
+  go-dbtest.md           DB-backed Go test recipe
+  release-train.md       release mechanics conventions
+  upstream-port-sweep.md fork sync loop
+  handoff.md             session-close handoff convention
 setup.sh                 personalization generator
 SETUP.md                 agent playbook (the recommended flow)
 customize.example.yml    answer-file template
