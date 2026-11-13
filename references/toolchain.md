@@ -78,6 +78,13 @@ A rule without a machine checking it is a wish. Applies to every project.
 - **actionlint** — static lint for workflow YAML (undefined matrix keys, `run:` shell errors via embedded shellcheck). Wire into lefthook on `.github/workflows/**` paths in repos that ship workflows.
 - **shellcheck** — lint every committed `.sh` and hook script before push; it flags the quoting/exit-code bugs that only fail on the machine that matters.
 
+## Self-hosted CI — KERN
+
+- **KERN** (https://github.com/Dvorinka/kern) — self-hosted, GitHub Actions-compatible CI: Go API + Postgres control plane, containerized job execution across a Linux/Windows/macOS runner fleet, GitHub App webhooks in, check runs + commit statuses back out on the PR. Standard `.github/workflows/` YAML runs unmodified.
+- `kern` CLI (install from the repo): `kern doctor` health probe, `kern runs` / `kern runs logs -f` to watch runs, `kern lint` compiles workflows offline with no server, `kern hooks install` writes a pre-push hook that runs `kern lint`.
+- Agent surface: streamable-HTTP MCP endpoint at `/api/v1/mcp` (run lifecycle, logs, runners, secrets) — tool matrix in `docs/connect.md` upstream.
+- Repo porting ledger and known gaps (arm64 images, `vars` context, docker-on-fork-PRs) live in the KERN repo at `docs/porting.md` — check it before moving a repo's CI over.
+
 ## HTTP debugging — mitmproxy
 
 - `mitmproxy` interactive / `mitmdump` headless — capture, inspect, replay HTTP(S) when the bug is on the wire: webhooks, third-party APIs, mobile-app traffic. Point the client at `http://localhost:8080` with the mitm CA installed.

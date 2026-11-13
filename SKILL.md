@@ -26,10 +26,13 @@ Persistent memory lives in a dedicated git repo following the [Agent Memory Repo
 3. Read `references/toolchain.md` before adding, changing, or configuring lint/format/test/CI tooling.
 4. Read `references/maps.md` for any map/location/geospatial UI.
 5. Read `references/terminal-data.md` for search, JSON, pipelines.
-6. Read `references/agent-ops.md` before dispatching parallel agents, worktree lanes, or remote-machine work.
-7. Invoke `ponytail` (default `full`) on every response — shortest working diff, stdlib first, no speculative abstractions. Mark shortcuts `// ponytail: <ceiling>, <upgrade path>`.
-8. Ship production-grade output: small modules, typed APIs, a11y, responsive, Docker-runnable.
-9. After meaningful changes: add concise inline comments (what/why/dependencies) and commit on a feature branch with a structured message. Open a PR - never push to `main` directly (see Pull Request Workflow).
+6. Read `references/agent-ops.md` before dispatching parallel agents, worktree lanes, or remote-machine work. Read `references/t3code.md` for the full T3 Code surface (CLI, MCP tools, providers, scheduling, PR watch, limits).
+7. Read `references/ship-verify.md` before deploying, verifying a release, or claiming something is live — clean-worktree deploys, verify the artifact not the stamp, process-leak sweep.
+8. Read `references/go-dbtest.md` before writing or running DB-backed Go tests (build-tag gating, isolated per-lane DBs, driver gotchas).
+9. Read `references/release-train.md` before tagging or releasing; `references/upstream-port-sweep.md` before syncing a fork with upstream; `references/handoff.md` before reporting done on multi-session work.
+10. Invoke `ponytail` (default `full`) on every response — shortest working diff, stdlib first, no speculative abstractions. Mark shortcuts `// ponytail: <ceiling>, <upgrade path>`.
+11. Ship production-grade output: small modules, typed APIs, a11y, responsive, Docker-runnable.
+12. After meaningful changes: add concise inline comments (what/why/dependencies) and commit on a feature branch with a structured message. Open a PR - never push to `main` directly (see Pull Request Workflow).
 
 ## Stack (locked — do not change without user approval)
 
@@ -53,8 +56,9 @@ Persistent memory lives in a dedicated git repo following the [Agent Memory Repo
 | Browser (live session) | **browser-harness** — CDP control of the real logged-in Chrome; reaches auth-walled flows Playwright's clean profile can't | — |
 | Task runner | **just** — `justfile` at repo root | `cli-developer` |
 | Worktrees | **worktrunk (`wt`)** — git worktree lifecycle for parallel agent work: `wt switch -c <branch>` create+enter, `wt merge`, `wt remove`, `wt list` (status/CI), `wt switch pr:<n>`; project hooks automate `npm install`/env copy on create. Installed via linuxbrew; shell integration via `wt config shell install` | — |
-| Agent orchestration | **t3code (`t3`)** — dispatch parallel agent threads in isolated worktrees: `t3 thread start <project> --worktree <ref> --branch <n> --wait --json`; remote machines via `t3 environment link`. Routing table: `references/agent-ops.md` | — |
+| Agent orchestration | **t3code (`t3`)** — dispatch parallel agent threads in isolated worktrees: `t3 thread start <project> --worktree <ref> --branch <n> --wait --json`; remote machines via `t3 environment link`. Routing table: `references/agent-ops.md`; full surface + guide: `references/t3code.md` | — |
 | CI (local) | **act** — run GitHub Actions locally pre-push (`act -j <job>`); **actionlint** — workflow YAML lint; `shellcheck` — shell script lint. `ciwatch` covers the remote side | — |
+| CI (self-hosted) | **KERN** (https://github.com/Dvorinka/kern) — GH Actions-compatible runner fleet; workflows run unmodified, `kern` CLI + MCP endpoint for agents; see `references/toolchain.md` | — |
 | HTTP debugging | **mitmproxy** (`mitmdump` headless) — capture/replay API traffic when the bug is on the wire | — |
 | Agent telemetry | **agenttrace** — session cost/token/duration reports, `--baseline` delta gating | — |
 | MCP servers | Whatever your harness wires — git, github, plus service MCPs (DB, files, deploys). Always `mcp_list_tools` before calling | — |
