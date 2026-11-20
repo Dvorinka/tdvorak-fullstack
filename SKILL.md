@@ -64,7 +64,7 @@ Persistent memory lives in a dedicated git repo following the [Agent Memory Repo
 | MCP servers | Whatever your harness wires — git, github, plus service MCPs (DB, files, deploys). Always `mcp_list_tools` before calling | — |
 | Shell env | **direnv** — committed `.envrc` per repo for gated env vars (test DSNs); see `references/toolchain.md` | — |
 | API collections | **Bruno** — `bruno/` committed `.bru` files, `bru run` headless | — |
-| Dep updates | **Dependabot** (`.github/dependabot.yml`, grouped weekly) — Renovate only if PR plumbing is wanted | — |
+| Dep updates | **Renovate** self-hosted in CI (scheduled workflow; PAT over GITHUB_TOKEN so dep PRs fire CI) — auto-discovers every manager (gomod/npm+pnpm/cargo/pip/dockerfile/compose/actions), grouped per-area PRs, Dependency Dashboard issue, `minimumReleaseAge` 7d for supply-chain age-gating, OSV vulnerability alerts | — |
 | Security scan | Layered open-source pipeline, run on nearly every project: **gitleaks** (secrets — pre-push diff + history audit), dep CVEs — **govulncheck** (Go) / **npm audit** or **OSV-Scanner** (JS, multi-ecosystem), **Semgrep** (SAST), **trivy fs + image** (deps/OS pkgs/secrets/IaC misconfig), **ZAP baseline** (headers/DAST vs deploys). CI fails on HIGH/CRITICAL; add Syft+Grype only when SBOM parity is wanted. Full audit: [Cloudflare security-audit-skill](https://github.com/cloudflare/security-audit-skill) | `security-reviewer` |
 | Go lint | **golangci-lint** in CI — `go vet` alone misses errcheck/staticcheck/unused | `golang-pro` |
 | Observability | **OpenTelemetry** — adopt on demand (needs collector+backend); slog/zap logs are the floor | — |
