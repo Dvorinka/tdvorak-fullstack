@@ -65,7 +65,7 @@ Persistent memory lives in a dedicated git repo following the [Agent Memory Repo
 | Shell env | **direnv** — committed `.envrc` per repo for gated env vars (test DSNs); see `references/toolchain.md` | — |
 | API collections | **Bruno** — `bruno/` committed `.bru` files, `bru run` headless | — |
 | Dep updates | **Dependabot** (`.github/dependabot.yml`, grouped weekly) — Renovate only if PR plumbing is wanted | — |
-| Security scan | **trivy fs** (deps/secrets) + **ZAP baseline** (headers/DAST vs deploys) + **gitleaks** + [Cloudflare security-audit-skill](https://github.com/cloudflare/security-audit-skill) (`security-audit` skill: multi-phase audit, independently verified findings) | `security-reviewer` |
+| Security scan | Layered open-source pipeline, run on nearly every project: **gitleaks** (secrets — pre-push diff + history audit), dep CVEs — **govulncheck** (Go) / **npm audit** or **OSV-Scanner** (JS, multi-ecosystem), **Semgrep** (SAST), **trivy fs + image** (deps/OS pkgs/secrets/IaC misconfig), **ZAP baseline** (headers/DAST vs deploys). CI fails on HIGH/CRITICAL; add Syft+Grype only when SBOM parity is wanted. Full audit: [Cloudflare security-audit-skill](https://github.com/cloudflare/security-audit-skill) | `security-reviewer` |
 | Go lint | **golangci-lint** in CI — `go vet` alone misses errcheck/staticcheck/unused | `golang-pro` |
 | Observability | **OpenTelemetry** — adopt on demand (needs collector+backend); slog/zap logs are the floor | — |
 | GRC / compliance | **Probo** — self-hosted, adopt on demand only (SOC2/ISO27001/GDPR) | — |
